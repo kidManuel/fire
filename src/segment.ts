@@ -12,10 +12,16 @@ import {
 export default class segment {
   p5 = null;
   age: number = AGING_SPEED;
+  posX: number;
+  posY: number;
 
   constructor(p5: P5, initialAge: number) {
     this.p5 = p5;
     this.age = initialAge;
+    this.posX = this.p5.mouseX;
+    this.posY = this.p5.mouseY;
+    // this.posX = this.p5.width / 2;
+    // this.posY = this.p5.height / 2;
   }
 
   draw() {
@@ -24,15 +30,21 @@ export default class segment {
     }
     const width = this.getWidth();
     const height = this.getHeight();
+
     const baseline = this.p5.mouseY;
-    const center = this.p5.mouseX;
-    this.p5.rect(
-      center - width / 2,
-      Math.max(baseline - this.age, baseline - MAX_AGE),
-      width,
-      height,
-      5
-    );
+
+    this.posY = Math.max(baseline - this.age, baseline - MAX_AGE);
+    this.posX = this.p5.mouseX;
+
+    // if (this.posX !== this.p5.mouseX) {
+    //   const deltaX = this.p5.mouseX - this.posX;
+    //   const remap = 1 - this.remapLifetime();
+    //   const newPosX = this.posX + deltaX * remap - width / 2;
+
+    //   this.posX = newPosX;
+    // }
+
+    this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
     this.ageSelf();
   }
 
