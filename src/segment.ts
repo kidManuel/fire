@@ -20,8 +20,6 @@ export default class segment {
     this.age = initialAge;
     this.posX = this.p5.mouseX;
     this.posY = this.p5.mouseY;
-    // this.posX = this.p5.width / 2;
-    // this.posY = this.p5.height / 2;
   }
 
   draw() {
@@ -38,11 +36,10 @@ export default class segment {
     if (this.posX !== this.p5.mouseX) {
       const deltaX = this.p5.mouseX - this.posX;
       const remap = 1 - this.remapLifetime();
-      const newPosX = this.posX + deltaX * remap;
+      const displacement = deltaX * remap;
 
-      this.posX = newPosX;
+      this.posX += displacement;
     }
-
     this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
     this.ageSelf();
   }
