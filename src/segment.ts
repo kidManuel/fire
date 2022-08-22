@@ -30,16 +30,22 @@ export default class segment {
     const height = this.getHeight();
 
     const baseline = this.p5.mouseY;
+    const targetY = Math.max(baseline - this.age, baseline - MAX_AGE);
+    const inverseRemap = 1 - this.remapLifetime();
 
-    this.posY = Math.max(baseline - this.age, baseline - MAX_AGE);
+    if (targetY !== this.posY) {
+      const deltaY = targetY - this.posY;
+      const displacement = deltaY * inverseRemap;
+      this.posY += displacement;
+    }
 
     if (this.posX !== this.p5.mouseX) {
       const deltaX = this.p5.mouseX - this.posX;
-      const remap = 1 - this.remapLifetime();
-      const displacement = deltaX * remap;
+      const displacement = deltaX * inverseRemap;
 
       this.posX += displacement;
     }
+
     this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
     this.ageSelf();
   }
