@@ -34,15 +34,14 @@ export default class segment {
     const baseline = this.p5.mouseY;
 
     this.posY = Math.max(baseline - this.age, baseline - MAX_AGE);
-    this.posX = this.p5.mouseX;
 
-    // if (this.posX !== this.p5.mouseX) {
-    //   const deltaX = this.p5.mouseX - this.posX;
-    //   const remap = 1 - this.remapLifetime();
-    //   const newPosX = this.posX + deltaX * remap - width / 2;
+    if (this.posX !== this.p5.mouseX) {
+      const deltaX = this.p5.mouseX - this.posX;
+      const remap = 1 - this.remapLifetime();
+      const newPosX = this.posX + deltaX * remap;
 
-    //   this.posX = newPosX;
-    // }
+      this.posX = newPosX;
+    }
 
     this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
     this.ageSelf();
