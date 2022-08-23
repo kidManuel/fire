@@ -1,5 +1,5 @@
 export const FRAMERATE = 30;
-export const INITIAL_MAX_AGE = 567;
+export const INITIAL_MAX_AGE = 600;
 export const LIFETIME = 5; /** in secs */
 
 export const MIN_SEG_WIDTH = 5;

@@ -16,7 +16,7 @@ const sketch = (p5: P5) => {
     p5.noStroke();
 
     for (let e = 0; e < SEGMENTS_AMMOUNT; e++) {
-      segments.push(new segment(p5, FULL_SEG_HEIGHT * e));
+      segments.push(new segment(p5, FULL_SEG_HEIGHT * e, e));
     }
   };
 

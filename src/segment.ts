@@ -11,15 +11,17 @@ import {
 
 export default class segment {
   p5 = null;
-  age: number = AGING_SPEED;
+  age: number;
   posX: number;
   posY: number;
+  id: number;
 
-  constructor(p5: P5, initialAge: number) {
+  constructor(p5: P5, initialAge: number, id: number) {
     this.p5 = p5;
     this.age = initialAge;
     this.posX = this.p5.mouseX;
     this.posY = this.p5.mouseY;
+    this.id = id;
   }
 
   draw() {
@@ -30,27 +32,26 @@ export default class segment {
     const height = this.getHeight();
 
     const baseline = this.p5.mouseY;
-    const targetY = Math.max(baseline - this.age, baseline - MAX_AGE);
-    const inverseRemap = 1 - this.remapLifetime();
+    const center = this.p5.mouseX;
 
+    const inverseRemap = 1 - this.remapLifetime();
+    const targetY = Math.max(baseline - this.age, baseline - MAX_AGE);
+
+    this.posY -= AGING_SPEED;
     if (targetY !== this.posY) {
       const deltaY = targetY - this.posY;
       const displacement = deltaY * inverseRemap;
       this.posY += displacement;
     }
 
-    if (this.posX !== this.p5.mouseX) {
-      const deltaX = this.p5.mouseX - this.posX;
+    if (this.posX !== center) {
+      const deltaX = center - this.posX;
       const displacement = deltaX * inverseRemap;
 
       this.posX += displacement;
     }
 
     this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
-    this.ageSelf();
-  }
-
-  ageSelf() {
     this.age += AGING_SPEED;
   }
 
@@ -58,6 +59,7 @@ export default class segment {
     if (this.age < MAX_SEG_HEIGHT) {
       return this.age;
     }
+
     if (this.age > MAX_AGE) {
       const n = MAX_SEG_HEIGHT - (this.age - MAX_AGE);
       return Math.max(0, n);
