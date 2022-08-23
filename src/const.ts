@@ -1,12 +1,12 @@
 export const FRAMERATE = 30;
-export const INITIAL_MAX_AGE = 600;
+export const INITIAL_MAX_AGE = 550;
 export const LIFETIME = 5; /** in secs */
 
-export const MIN_SEG_WIDTH = 5;
-export const MAX_SEG_WIDTH = 300;
+export const MIN_SEG_WIDTH = 10;
+export const MAX_SEG_WIDTH = 400;
 
 export const MAX_SEG_HEIGHT = 45;
-export const SEG_MARGIN = 3;
+export const SEG_MARGIN = 10;
 export const FULL_SEG_HEIGHT = MAX_SEG_HEIGHT + SEG_MARGIN;
 
 export const sizeFunc = (x: number) => {

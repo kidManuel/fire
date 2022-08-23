@@ -12,8 +12,9 @@ const sketch = (p5: P5) => {
     const canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight);
 
     p5.frameRate(FRAMERATE);
-    p5.fill(255, 114, 159, 150);
-    p5.noStroke();
+    p5.noFill();
+    p5.stroke("#191919");
+    p5.strokeWeight(2);
 
     for (let e = 0; e < SEGMENTS_AMMOUNT; e++) {
       segments.push(new segment(p5, FULL_SEG_HEIGHT * e, e));
@@ -25,7 +26,7 @@ const sketch = (p5: P5) => {
   };
 
   p5.draw = () => {
-    p5.background("#FED99B");
+    p5.background("#F1E8B8");
     segments.forEach((s) => s.draw());
   };
 };

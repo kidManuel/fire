@@ -51,7 +51,13 @@ export default class segment {
       this.posX += displacement;
     }
 
-    this.p5.rect(this.posX - width / 2, this.posY, width, height, 5);
+    this.p5.rect(
+      this.posX - width / 2,
+      this.posY,
+      width,
+      height,
+      MAX_SEG_HEIGHT
+    );
     this.age += AGING_SPEED;
   }
 
